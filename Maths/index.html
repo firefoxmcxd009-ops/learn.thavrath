@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Khmer History Quiz — FXMC</title>
+
+<!-- Website Icon -->
+<link rel="icon" type="image/png" href="/Logo.png">
+<link rel="apple-touch-icon" href="/Logo.png">
+
+<!-- Telegram / Facebook / Discord Preview -->
+<meta property="og:title" content="Hello! My name is Kin Thavrath. My Nick Name is FireFoxMC_XD. Let's We Learn Myself Now." />
+<meta property="og:description" content="Learn Myself" />
+<meta property="og:image" content="Logo.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:linear-gradient(90deg,#ff8a00,#ff3d81);
+  --glass:rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box;}
+body{
+  font-family:"Noto Sans Khmer", sans-serif;
+  background: linear-gradient(180deg,#071028 0%,#071b2b 100%);
+  color:#e6eef8;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+.card{
+  width:400px;
+  border-radius:16px;
+  padding:28px;
+  text-align:center;
+  background:var(--card);
+}
+h1 {
+  background: linear-gradient(45deg, rgb(255, 213, 0), rgb(255, 25, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size:35px;
+  margin:0 0 12px;
+  animation: title 0.5s ease-in-out;
+}
+@keyframes title { from { translate: 100%; } }
+p{font-size:13px;color:rgba(230,238,248,0.75);margin:0 0 20px;}
+.choice-btn{
+  position:relative;
+  display:block;
+  width:100%;
+  margin:8px 0;
+  padding:12px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff7a00,#ff3d81);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  outline:none;
+  transition: transform 0.2s ease, box-shadow .12s ease;
+  box-shadow:0 6px 18px rgba(255,61,129,0.18),0 2px 6px rgba(0,0,0,0.45);
+  overflow:hidden;
+  animation: answer 0.5s ease-in-out;
+}
+@keyframes answer { from { transform: translateY(-100%); opacity: 0;} }
+.choice-btn:active{transform:scale(.98);}
+.choice-btn:hover{
+  transform: scale(1.02);
+  background:linear-gradient(90deg,#009dff,#6a00ff);
+}
+.ripple{
+  position:absolute;border-radius:50%;transform:scale(0);
+  background:rgba(255,255,255,0.35);
+  animation:ripple .6s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
+.popup{
+  margin-top:18px;
+  padding:14px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow:0 6px 18px rgba(2,6,23,0.5);
+  transform-origin:center top;
+  transform: translateY(-8px) scale(.98);
+  opacity:0;
+  transition: all .25s cubic-bezier(.2,.9,.2,1);
+  pointer-events: none;
+}
+.popup.show{
+  transform: translateY(0) scale(1);
+  opacity:1;
+  pointer-events:auto;
+}
+.reward-amount{font-size:22px;font-weight:800;color:#ffe9b8;}
+canvas.confetti{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:20;}
+.muted{ font-size:12px;color:rgba(230,238,248,0.6);margin-top:10px }
+
+/* Header Menu */
+.header-bg {
+  background: linear-gradient(45deg, #380087, #006989);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+header {
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  margin-right: 20px;
+  background: linear-gradient(45deg, rgba(255, 187, 0, 0.877), rgb(255, 47, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.menu a {
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: .2s;
+  background: rgba(255,255,255,0.12);
+  text-decoration: none;
+}
+.menu a:hover { background: rgba(255,255,255,0.25); border:1px solid rgba(255,255,255,0.25); }
+
+/* Recipe Button */
+.Recipe {
+  position: relative;
+  display: block;
+  background: linear-gradient(45deg, rgb(0, 179, 255), rgb(106, 0, 255));
+  width: 125px;
+  height: 7%;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+  font-weight: bolder;
+  font-family: "Noto Sans Khmer", sans-serif;
+  border: none;
+  transition: 0.5s;
+}
+.Recipe:hover { width: 250px; }
+.Recipe-link { color: white; text-decoration: none; }
+#Recipe {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%) scale(0.6);
+  opacity: 0;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(4px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  width: 245px;
+  display: none;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(.17,.67,.43,1.32);
+}
+#Recipe.show-popup { display:block; opacity:1; transform:translateY(-50%) scale(1); }
+h5 { font-size: 20px; font-weight: 600; background: linear-gradient(45deg, rgb(255, 0, 0), rgb(136, 0, 255)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+</style>
+</head>
+
+<body>
+<div class="card" id="card">
+  <div class="header-bg">
+    <header><i class="fa-solid fa-book"></i> ចំណេះមិនគួរដឹង</header>
+    <div class="menu">
+      <ul>
+        <li><a href="/Home">ទំព័រដើម</a></li>
+        <li><a href="/History">ប្រវត្តិវិទ្យា</a></li>
+        <li><a href="/Maths">គណិតវិទ្យា</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <h1>គណិតវិទ្យា</h1>
+  <p id="question">លំហាត់ 1</p>
+  <div id="choices"></div>
+
+  <div class="popup" id="popup">
+    <div style="display:flex;align-items:center;gap:12px;justify-content:center;">
+      <div>
+        <div class="reward-amount" id="rewardAmount">ចុម! ឆ្លាតម៉េស? ✅</div>
+        <div class="muted">បន្តទៅសំនួរបន្ទាប់</div>
+      </div>
+    </div>
+  </div>
+
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <!-- Recipe Button -->
+  <button class="Recipe">
+    <span class="Recipe-link">រូបមន្តទាំង៧</span>
+  </button>
+  <div id="Recipe">
+    <h5>រូបមន្តទាំង៧</h5>
+    <p><strong>1.</strong> (a + b)² = a² + 2ab + b²</p>
+    <p><strong>2.</strong> (a − b)² = a² − 2ab + b²</p>
+    <p><strong>3.</strong> a² − b² = (a + b)(a − b)</p>
+    <p><strong>4.</strong> (a + b)³ = a³ + 3a²b + 3ab² + b³</p>
+    <p><strong>5.</strong> (a − b)³ = a³ − 3a²b + 3ab² − b³</p>
+    <p><strong>6.</strong> a³ + b³ = (a + b)(a² − ab + b²)</p>
+    <p><strong>7.</strong> a³ − b³ = (a − b)(a² + ab + b²)</p>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {q:"(a+b)²=?",a:"a²+2ab+b²",c:["a²+2ab+b","a+2ab+b²","a+2ab+b"]},
+  {q:"a²-b²=?",a:"(a+b)(a-b)",c:["(a+b)(a+b)","(a-b²)(a+b)","(a²-b)(a-b²)"]},
+  {q:"2x-5=2-5x",a:"x=1",c:["x=2","x=3","x=4"]},
+];
+
+let index = 0;
+const choicesDiv = document.getElementById('choices');
+const questionP = document.getElementById('question');
+const popup = document.getElementById('popup');
+const confettiCanvas = document.getElementById('confetti');
+
+function loadQuestion(){
+  const q = questions[index];
+  questionP.textContent = `លំហាត់ ${index+1}: ${q.q}`;
+  choicesDiv.innerHTML = "";
+  let all = [q.a,...q.c]; all.sort(() => Math.random() - 0.5);
+  all.forEach(choice => {
+    const btn = document.createElement('button');
+    btn.className = "choice-btn";
+    btn.textContent = choice;
+    btn.onclick = (e) => handleAnswer(choice,e);
+    choicesDiv.appendChild(btn);
+  });
+}
+
+function handleAnswer(answer,e){
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const circle = document.createElement('span');
+  circle.className = 'ripple';
+  const size = Math.max(rect.width,rect.height);
+  circle.style.width = circle.style.height = size + 'px';
+  circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+  circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+  btn.appendChild(circle);
+  setTimeout(()=>circle.remove(),600);
+
+  if(answer === questions[index].a){
+    popup.classList.add('show');
+    popup.textContent = "ចុម! ឆ្លាតម៉េស? ✅";
+    burstConfetti(confettiCanvas,30);
+    setTimeout(()=>{
+      popup.classList.remove('show');
+      index++;
+      if(index < questions.length) loadQuestion();
+      else { questionP.textContent="✅ សំនួរបានបញ្ចប់!"; choicesDiv.innerHTML=""; }
+    },1200);
+  } else {
+    popup.classList.add('show'); popup.textContent="❌ ព្យាយាមម្ដងទៀត!";
+    setTimeout(()=>popup.classList.remove('show'),1200);
+    btn.style.background = "linear-gradient(90deg,#ff0000,#ff5c5c)";
+    btn.style.transform = "scale(1.05)";
+    setTimeout(()=>{btn.style.background="";btn.style.transform="";},1200);
+  }
+}
+
+// Confetti
+function burstConfetti(canvas,count=30){
+  const ctx = canvas.getContext('2d');
+  const DPR = window.devicePixelRatio || 1;
+  canvas.width = canvas.clientWidth*DPR;
+  canvas.height = canvas.clientHeight*DPR;
+  ctx.scale(DPR,DPR);
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  const pieces = [];
+  const colors = ['#FF3D81','#FF8A00','#FFD166','#7EE7C9','#71C7FF','#A78BFA'];
+  for(let i=0;i<count;i++) pieces.push({
+    x:w/2,y:h/2,vx:(Math.random()-0.5)*8,vy:(Math.random()-1.5)*8,
+    r:6+Math.random()*6,color:colors[Math.floor(Math.random()*colors.length)],
+    life:60+Math.random()*40
+  });
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(let p of pieces){
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.life--;
+      ctx.fillStyle=p.color; ctx.fillRect(p.x,p.y,p.r,p.r*0.6);
+    }
+    for(let i=pieces.length-1;i>=0;i--){ if(pieces[i].life<=0) pieces.splice(i,1);}
+    if(pieces.length>0) requestAnimationFrame(draw); else ctx.clearRect(0,0,w,h);
+  }
+  draw();
+}
+
+window.addEventListener('resize',()=>{ confettiCanvas.width=confettiCanvas.clientWidth; confettiCanvas.height=confettiCanvas.clientHeight; });
+loadQuestion();
+
+// Recipe Hover
+const recipeBtn = document.querySelector(".Recipe");
+const recipePopup = document.getElementById("Recipe");
+recipeBtn.addEventListener("mouseenter", () => recipePopup.classList.add("show-popup"));
+recipeBtn.addEventListener("mouseleave", () => recipePopup.classList.remove("show-popup"));
+recipePopup.addEventListener("mouseenter", () => recipePopup.classList.add("show-popup"));
+recipePopup.addEventListener("mouseleave", () => recipePopup.classList.remove("show-popup"));
+</script>
+
+</body>
+</html>
