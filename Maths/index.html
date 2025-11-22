@@ -23,7 +23,6 @@
 <style>
 :root{
   --bg:#0f1724;
-  --card:#0b1220;
   --accent:linear-gradient(90deg,#ff8a00,#ff3d81);
   --glass:rgba(255,255,255,0.03);
 }
@@ -43,7 +42,6 @@ body{
   border-radius:16px;
   padding:28px;
   text-align:center;
-  background:var(--card);
 }
 h1 {
   background: linear-gradient(45deg, rgb(255, 213, 0), rgb(255, 25, 0));
@@ -181,6 +179,46 @@ header {
   display: none;
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(.17,.67,.43,1.32);
 }
+/*HomePage Button When End The Answers*/
+.Home {
+  background: linear-gradient(45deg, rgb(7, 152, 255), rgb(0, 81, 255), rgb(136, 0, 255));
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  font-family: "Noto Sans Khmer", sans-serif;
+  color: white;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: 0.2s;
+  box-shadow: 0px 0px 10px orange,
+  3px 1px 10px rgb(230, 0, 255),
+  -4px 0px 10px blue;
+  animation: glow 1s infinite unset;
+}
+.Home:hover {
+  scale: 1.05;
+  width: 125px;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0px 0px 10px blue,
+  5px 0px 10px red,
+  0px 0px 10px orange;
+  }
+  to {
+    box-shadow: 0px 0px 10px orange,
+  0px 0px 10px rgb(230, 0, 255),
+  0px 0px 10px blue;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
 #Recipe.show-popup { display:block; opacity:1; transform:translateY(-50%) scale(1); }
 h5 { font-size: 20px; font-weight: 600; background: linear-gradient(45deg, rgb(255, 0, 0), rgb(136, 0, 255)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 </style>
@@ -271,16 +309,19 @@ function handleAnswer(answer,e){
 
   if(answer === questions[index].a){
     popup.classList.add('show');
-    popup.textContent = "ចុម! ឆ្លាតម៉េស? ✅";
+    popup.textContent = "ចុម! ឆ្លាតម៉េស?";
     burstConfetti(confettiCanvas,30);
     setTimeout(()=>{
       popup.classList.remove('show');
       index++;
       if(index < questions.length) loadQuestion();
-      else { questionP.textContent="✅ សំនួរបានបញ្ចប់!"; choicesDiv.innerHTML=""; }
+      else { questionP.textContent="សំនួរបានបញ្ចប់!"; choicesDiv.innerHTML="";
+        choicesDiv.innerHTML = `
+        <button class="Home"><a href="/Home">ទំព័រដើម</a></button>`;
+       }
     },1200);
   } else {
-    popup.classList.add('show'); popup.textContent="❌ ព្យាយាមម្ដងទៀត!";
+    popup.classList.add('show'); popup.textContent="❌ ព្យាយាមម្ដងទៀត! នៅជីវិតក្រោយ";
     setTimeout(()=>popup.classList.remove('show'),1200);
     btn.style.background = "linear-gradient(90deg,#ff0000,#ff5c5c)";
     btn.style.transform = "scale(1.05)";

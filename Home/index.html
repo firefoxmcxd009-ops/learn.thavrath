@@ -149,12 +149,55 @@ header {
   box-shadow: 0px 0px 10px rgb(11, 11, 11);
   border-radius: 15px;
 }
-.fa-telegram {
-  font-size: 20px;
+.fa-brands {
+  margin: 10px;
+  font-size: 25px;
+  background: linear-gradient(45deg, rgb(179, 0, 255), rgb(0, 81, 255)) hidden;
+  border-radius: 25px;
+  width: 30px;
+  transition: 0.2s;
+  color: white;
+  text-decoration: none;
+  height: 25px;
+  animation: icons 0.4s ease-in-out;
 }
-.Telegram {
-    font-weight: bolder;
-    text-decoration: none;
+@keyframes icons {
+  from {opacity: 0; transform: translateY(100%);}
+} 
+.fa-brands:hover {
+  scale: 1.2;
+}
+.fa-telegram:hover {
+  color: #009dff;
+  text-shadow: 1px 2px 0px white;
+}
+.fa-discord:hover {
+  color: blue;
+  text-shadow: 1px 2px 0px white;
+}
+.fa-tiktok:hover {
+  color: black;
+  text-shadow: 1.5px 1px 0px red,
+  -1.5px 1px 0px #009dff;
+}
+a {
+  text-decoration: none;
+}
+.fa-name {
+  font-size: 5px;
+  text-shadow: none;
+  scale: 2;
+  color: rgb(255, 255, 255);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.fa-name:hover {
+  text-shadow: none;
+}
+h5 {
+  font-size: 15px;
+  font-weight: bolder;
+  color: #009dff;
+  text-decoration: underline white;
 }
 </style>
 </head>
@@ -162,7 +205,7 @@ header {
 
 <div class="card" id="card">
   <div class="header-bg">
-  <header><i class="fa-solid fa-book"></i> ចំណេះមិនគួរដឹង</header>
+  <header><i class="fa-solid fa-book"></i><a href="https://thavrath-learning.vercel.app/"> ចំណេះមិនគួរដឹង</a></header>
   <div class="menu">
     <ul>
       <li><a href="/index.html">ទំព័រដើម</a></li>
@@ -174,7 +217,7 @@ header {
   
 <h1><i class="fa-solid fa-book"></i> ចំណេះមិនគួរដឹង <i class="fa-solid fa-pen"></i></h1>
 <h2>សូមស្វាគមន៍</h1>
-<h3>ជ្រើសរើសមុខងារ <strong><a href="/Learn.Rath.Web/History.html">ប្រវត្តិវិទ្យា</a> </strong>ឬ <strong><a href="/Learn.Rath.Web/Maths.html">គណិតវិទ្យា</a></strong></h3>
+<h3>ជ្រើសរើសមុខងារ <strong><a href="/History">ប្រវត្តិវិទ្យា</a> </strong>ឬ <strong><a href="/Maths">គណិតវិទ្យា</a></strong></h3>
 
 <!--===== Box =====-->
 <div class="Box">
@@ -184,7 +227,10 @@ header {
   <p class="about" style="color: #ff8a00;">បញ្ជាក់: <strong>ស្ថិតនៅក្នុងវើសិនតេស្ត</strong></p>
 </div>
 <footer>
-  <p><a href="https://t.me/firefoxmc_xd" class="Telegram"><i class="fa-brands fa-telegram"></i>Telegram</a></p>
+  <h5>Contact</h5>
+  <a href="https://t.me/firefoxmc_xd"><i class="fa-brands fa-telegram"><p class="fa-name">Telegram</p></i></a>
+  <a href="https://t.me/firefoxmc_xd"><i class="fa-brands fa-discord"><p class="fa-name">Discord</p></i></a>
+  <a href="https://tiktok.com//@firefoxmc_xd"><i class="fa-brands fa-tiktok"><p class="fa-name">Tiktok</p></i></a>
 </footer>
 <div>
 
